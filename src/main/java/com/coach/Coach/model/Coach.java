@@ -1,4 +1,4 @@
-package com.coach.Coach;
+package com.coach.Coach.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
