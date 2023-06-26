@@ -2,9 +2,10 @@ package com.coach.Coach.controller;
 
 
 import com.coach.Coach.model.Club;
-import com.coach.Coach.model.Coach;
 import com.coach.Coach.service.ClubService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,17 +15,59 @@ import java.util.Optional;
 @RequestMapping("/club")
 public class ClubController {
 
-    @Autowired
     private ClubService clubService;
-    @GetMapping
-    List<Club> getAllClubs() {return clubService.getAllClubs();}
 
-    @GetMapping("/{id}")
-    public Optional<Club> getClubById (@PathVariable Long id) { return clubService.getClubById(id); }
-    @DeleteMapping("/{id}")
-    public void deleteClubById (@PathVariable Long id) { clubService.deleteClubById(id); }
+    @Autowired
+    public ClubController(ClubService clubService) {
+        this.clubService = clubService;
+    }
+
+    @GetMapping
+    List<Club> getAllClubs() {
+        return clubService.getAllClubs();
+    }
+
+    @GetMapping("/{clubId}")
+    public ResponseEntity<Club> getClubById(@PathVariable Long clubId) {
+        Optional<Club> responseFromClub = clubService.getClubById(clubId);
+        if (responseFromClub.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            return ResponseEntity.ok(responseFromClub.get());
+        }
+    }
+
+    @DeleteMapping("/{clubId}")
+    public ResponseEntity<Void> deleteClubById(@PathVariable Long clubId) {
+        if (clubService.getClubById(clubId).isEmpty()) {
+            return ResponseEntity.notFound().build();
+        } else {
+            clubService.deleteClubById(clubId);
+            return ResponseEntity.noContent().build();
+        }
+    }
 
     @PostMapping
-    public Optional<Club> newClub (@RequestBody Club newClub) { return clubService.newClub(newClub); }
+    public ResponseEntity<Club> postNewClub(@RequestBody Club newClub) {
+        Optional<Club> savedClub = clubService.postNewClub(newClub);
+        if(savedClub.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+        } else {
+            return ResponseEntity.status(HttpStatus.CREATED).body(savedClub.get());
+        }
+    }
 
+    @PatchMapping("/{clubId}/setCoach/{coachId}")
+    public ResponseEntity<String> setCoachForClub(@PathVariable Long clubId, @PathVariable Long coachId) {
+        Optional<Club> club = clubService.setCoachForClub(clubId, coachId);
+        if (club.isPresent()) {
+            return ResponseEntity.ok("Coach was set successfully");
+        }
+        return ResponseEntity.notFound().build();
+
+    }
 }
+
+
+
+

@@ -1,41 +1,64 @@
 package com.coach.Coach.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.List;
+
 
 @Entity
 @Table
 public class Coach {
 
     @Id
-    @GeneratedValue
-    private Long id;
-    private String name;
-    private Integer age;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "coach_id")
+    private Long coachId;
+    @OneToOne(mappedBy = "coach")
+    @JsonIgnore
+    private Club club;
+    @OneToMany(mappedBy = "coach")
+    @JsonIgnore
+    private List<Player> playerList;
+    private String coachName;
+    private Integer coachAge;
+
+    public Coach() {
+
+    }
 
     public Long getId() {
-        return id;
+        return coachId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.coachId = id;
     }
 
     public String getName() {
-        return name;
+        return coachName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.coachName = name;
     }
 
     public Integer getAge() {
-        return age;
+        return coachAge;
     }
 
     public void setAge(Integer age) {
-        this.age = age;
+        this.coachAge = age;
+    }
+
+    public Club getClub() {
+        return club;
+    }
+
+    public void setClub(Club club) {
+        this.club = club;
+    }
+
+    public void setPlayer(Object o) {
     }
 }

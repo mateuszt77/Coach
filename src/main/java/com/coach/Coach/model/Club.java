@@ -1,17 +1,25 @@
 package com.coach.Coach.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Club {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "club_id")
     private Long id;
+    @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "fk_coach_id")
+    private Coach coach;
+
+
     private String name;
     private int age;
+
+    public Club() {
+
+    }
 
     public Long getId() {
         return id;
@@ -35,5 +43,12 @@ public class Club {
 
     public void setAge(int age) {
         this.age = age;
+    }
+    public Coach getCoach() {
+        return coach;
+    }
+
+    public void setCoach(Coach coach) {
+        this.coach = coach;
     }
 }

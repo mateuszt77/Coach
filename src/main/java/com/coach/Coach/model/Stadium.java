@@ -1,39 +1,38 @@
 package com.coach.Coach.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Stadium {
 
     @Id
-    @GeneratedValue
-    private Long id;
-    private String name;
-    private int age;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "stadium_id")
+    private Long stadiumId;
+    private String stadiumName;
+    private int stadiumAge;
 
     public Long getId() {
-        return id;
+        return stadiumId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.stadiumId = id;
     }
 
     public String getName() {
-        return name;
+        return stadiumName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.stadiumName = name;
     }
 
     public int getAge() {
-        return age;
+        return stadiumAge;
     }
 
     public void setAge(int age) {
-        this.age = age;
+        this.stadiumAge = age;
     }
 }

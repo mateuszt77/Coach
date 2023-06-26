@@ -1,6 +1,8 @@
 package com.coach.Coach.service;
 
+import com.coach.Coach.model.Club;
 import com.coach.Coach.model.Coach;
+import com.coach.Coach.repository.ClubRepository;
 import com.coach.Coach.repository.CoachRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,6 +15,13 @@ public class CoachService {
 
     @Autowired
     private CoachRepository coachRepository;
+    private ClubRepository clubRepository;
+
+    public CoachService(CoachRepository coachRepository, ClubRepository clubRepository) {
+        this.coachRepository = coachRepository;
+        this.clubRepository = clubRepository;
+    }
+
 
     public List<Coach> getAllCoaches() {
         return coachRepository.findAll();
@@ -22,12 +31,27 @@ public class CoachService {
         return coachRepository.findById(id);
     }
 
-    public void deleteCoachById(Long id) {
-        coachRepository.deleteById(id);
+
+public void deleteCoachById(Long coachId) {
+    Optional<Coach> coachToDelete = coachRepository.findById(coachId);
+    if(coachToDelete.isPresent()) {
+        Club club = coachToDelete.get().getClub();
+        if(club != null) {
+            club.setCoach(null);
+            clubRepository.save(club);
+        }
+        coachRepository.deleteById(coachId);
+    }
+}
+    public Optional<Coach> postNewCoach(Coach newCoach) {
+        if(newCoach.getId() != null && coachRepository.existsById(newCoach.getId())) {
+            return Optional.empty();
+        }
+        return Optional.of(coachRepository.save(newCoach));
     }
 
     public Optional<Coach> createNewCoach(Coach newCoach) {
-        if (coachRepository.existsById(newCoach.getId())) {
+        if (newCoach.getId() != null && coachRepository.existsById(newCoach.getId())) {
             return Optional.empty();
         }
             return Optional.of(coachRepository.save(newCoach));
@@ -39,16 +63,6 @@ public class CoachService {
         }
         return Optional.empty();
     }
-
-//    public Optional<Coach> coachEntityUpdate(Long id, String name, Integer age);
-//
-//    {
-//        return Optional.empty();
-//    }
-
-    // public Optional<Coach> putCoachById(Long id) {return coachRepository.findById(id); }
-
 }
 
-//
 

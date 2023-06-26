@@ -1,39 +1,54 @@
 package com.coach.Coach.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class Player {
 
     @Id
-    @GeneratedValue
-    private Long id;
-    private String name;
-    private int age;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "player_id")
+    private Long playerId;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "fk_coach_id")
+    private Coach coach;
+
+    private String playerName;
+    private int playerAge;
+
 
     public Long getId() {
-        return id;
+        return playerId;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.playerId = id;
     }
 
     public String getName() {
-        return name;
+        return playerName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.playerName = name;
     }
 
     public int getAge() {
-        return age;
+        return playerAge;
     }
 
     public void setAge(int age) {
-        this.age = age;
+        this.playerAge = age;
+    }
+
+    public List<Coach> getCoaches() {
+        return getCoaches();
+    }
+    public void setGreenhouses(List<Coach> coaches) {
+        this.coach = coach;
     }
 }

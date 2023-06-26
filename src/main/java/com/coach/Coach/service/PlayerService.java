@@ -15,6 +15,8 @@ public class PlayerService {
 
     @Autowired
     private PlayerRepository playerRepository;
+    @Autowired
+    private CoachRepository coachRepository;
 
     public List<Player> getAllPlayers() {
         return playerRepository.findAll();
@@ -22,9 +24,24 @@ public class PlayerService {
     public Optional<Player> getPlayerById(Long id) {
         return playerRepository.findById(id);
     }
-    public void deletePlayerById(Long id) {
-        playerRepository.deleteById(id);
+
+        public void deletePlayerById(Long playerId) {
+        Optional<Player> playerToDelete = playerRepository.findById(playerId);
+        if(playerToDelete.isPresent()) {
+            for (Coach coach : playerToDelete.get().getCoaches()) {
+                coach.setPlayer(null);
+                coachRepository.save(coach);
+            }
+            playerRepository.deleteById(playerId);
+        }
     }
+        public Optional<Player> postNewPlayer(Player newPlayer) {
+        if(newPlayer.getId() != null && playerRepository.existsById(newPlayer.getId())) {
+            return Optional.empty();
+        }
+        return Optional.of(playerRepository.save(newPlayer));
+    }
+
     public Optional<Player> createNewPlayer(Player newPlayer) {
         if (playerRepository.existsById(newPlayer.getId())) {
             return Optional.empty();
@@ -32,3 +49,5 @@ public class PlayerService {
         return Optional.of(playerRepository.save(newPlayer));
     }
 }
+
+

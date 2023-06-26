@@ -20,10 +20,10 @@ public class StadiumController {
     @GetMapping
     public List<Stadium> getAllStadiums() {return stadiumService.getAllStadiums();}
 
-    @GetMapping("/{id}")
+    @GetMapping("/{stadiumId}")
     public Optional<Stadium> getStadiumById (@PathVariable Long id) { return stadiumService.getStadiumById(id); }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/{stadiumId}")
     public void deleteStadiumById (@PathVariable Long id) { stadiumService.deleteStadiumById(id); }
 
     @PostMapping
