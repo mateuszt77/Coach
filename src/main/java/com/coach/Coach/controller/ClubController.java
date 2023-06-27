@@ -37,6 +37,11 @@ public class ClubController {
         }
     }
 
+//    @GetMapping("/getClubsByName/{name}")
+//    public List<Club> FindAllClubsByName(@PathVariable String name) {
+//        return clubService.findAllClubsByName(name);
+//    }
+
     @DeleteMapping("/{clubId}")
     public ResponseEntity<Void> deleteClubById(@PathVariable Long clubId) {
         if (clubService.getClubById(clubId).isEmpty()) {
@@ -50,10 +55,20 @@ public class ClubController {
     @PostMapping
     public ResponseEntity<Club> postNewClub(@RequestBody Club newClub) {
         Optional<Club> savedClub = clubService.postNewClub(newClub);
-        if(savedClub.isEmpty()) {
+        if (savedClub.isEmpty()) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         } else {
             return ResponseEntity.status(HttpStatus.CREATED).body(savedClub.get());
+        }
+    }
+
+    @PutMapping("/completeUpdate/{clubId}")
+    public ResponseEntity<String> completeClubEntityUpdate(@PathVariable Long clubId, @RequestBody Club updatedClub) {
+        Optional<Club> clubToBeUpdated = clubService.completeClubEntityUpdated(clubId, updatedClub);
+        if (clubToBeUpdated.isPresent()) {
+            return ResponseEntity.ok("Club updated successfully!");
+        } else {
+            return ResponseEntity.notFound().build();
         }
     }
 

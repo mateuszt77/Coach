@@ -26,6 +26,10 @@ public class ClubService {
         return clubRepository.findById(id);
     }
 
+//    public List<Club> findAllClubsByName(String name) {
+//        return clubRepository.findAllByNameInclude(name);
+//    }
+
     public void deleteClubById(Long id) {
         clubRepository.deleteById(id);
     }
@@ -36,7 +40,13 @@ public class ClubService {
         }
         return Optional.of(clubRepository.save(newClub));
     }
-
+    public Optional<Club> completeClubEntityUpdated(Long clubId, Club updateClub) {
+        if(clubRepository.existsById(clubId)) {
+            updateClub.setId(clubId);
+            return Optional.of(clubRepository.save(updateClub));
+        }
+        return Optional.empty();
+    }
     public Optional<Club> createNewClub(Club newClub) {
         if (newClub.getId() != null && clubRepository.existsById(newClub.getId())) {
             return Optional.empty();

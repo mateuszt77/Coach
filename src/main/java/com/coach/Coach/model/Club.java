@@ -51,4 +51,6 @@ public class Club {
     public void setCoach(Coach coach) {
         this.coach = coach;
     }
+
+
 }

@@ -4,8 +4,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 import java.util.List;
+import java.util.Set;
 
 @Entity
+@Table
 public class Player {
 
     @Id
@@ -16,6 +18,10 @@ public class Player {
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "fk_coach_id")
     private Coach coach;
+
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JoinTable(name = "player_stadium", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "stadium_id"))
+    public Set<Stadium> stadiums;
 
     private String playerName;
     private int playerAge;
@@ -45,10 +51,45 @@ public class Player {
         this.playerAge = age;
     }
 
-    public List<Coach> getCoaches() {
-        return getCoaches();
+    public Long getPlayerId() {
+        return playerId;
     }
-    public void setGreenhouses(List<Coach> coaches) {
+
+    public void setPlayerId(Long playerId) {
+        this.playerId = playerId;
+    }
+
+    public Coach getCoach() {
+        return coach;
+    }
+
+    public void setCoach(Coach coach) {
         this.coach = coach;
+    }
+
+    public String getPlayerName() {
+        return playerName;
+    }
+
+    public void setPlayerName(String playerName) {
+        this.playerName = playerName;
+    }
+
+    public int getPlayerAge() {
+        return playerAge;
+    }
+
+    public void setPlayerAge(int playerAge) {
+        this.playerAge = playerAge;
+    }
+    public Set<Stadium> getStadiums() {
+        return stadiums;
+    }
+    public void setStadiums(Set<Stadium> stadiums) {
+        this.stadiums = stadiums;
+    }
+
+    public void addStadium(Stadium stadium) {
+        this.stadiums.add(stadium);
     }
 }

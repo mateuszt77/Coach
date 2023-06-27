@@ -59,6 +59,39 @@ public class Coach {
         this.club = club;
     }
 
-    public void setPlayer(Object o) {
+    public Long getCoachId() {
+        return coachId;
+    }
+
+    public void setCoachId(Long coachId) {
+        this.coachId = coachId;
+    }
+
+    public List<Player> getPlayerList() {
+        return playerList;
+    }
+
+    public void setPlayerList(List<Player> playerList) {
+        this.playerList = playerList;
+    }
+
+    public String getCoachName() {
+        return coachName;
+    }
+
+    public void setCoachName(String coachName) {
+        this.coachName = coachName;
+    }
+
+    public Integer getCoachAge() {
+        return coachAge;
+    }
+
+    public void setCoachAge(Integer coachAge) {
+        this.coachAge = coachAge;
+    }
+
+    public void addPlayer(Player player) {
+        this.playerList.add(player);
     }
 }

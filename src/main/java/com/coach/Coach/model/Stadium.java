@@ -1,14 +1,24 @@
 package com.coach.Coach.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
+@Table
 public class Stadium {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "stadium_id")
     private Long stadiumId;
+    @ManyToMany(cascade = CascadeType.MERGE)
+    @JsonIgnore
+    //@ManyToMany(mappedBy = "products")
+    @JoinTable(name = "player_stadium", joinColumns = @JoinColumn(name = "stadium_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
+    private Set<Player> players;
+
+
     private String stadiumName;
     private int stadiumAge;
 
@@ -34,5 +44,17 @@ public class Stadium {
 
     public void setAge(int age) {
         this.stadiumAge = age;
+    }
+
+    public Set<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(Set<Player> players) {
+        this.players = players;
+    }
+
+    public void addPlayer(Player player) {
+        this.players.add(player);
     }
 }
