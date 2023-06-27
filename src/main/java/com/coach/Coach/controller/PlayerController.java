@@ -14,7 +14,6 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/player")
 public class PlayerController {
-
     private PlayerService playerService;
 
     @Autowired
@@ -76,5 +75,3 @@ public class PlayerController {
         return ResponseEntity.notFound().build();
     }
 }
-
-

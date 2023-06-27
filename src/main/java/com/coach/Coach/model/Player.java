@@ -1,9 +1,7 @@
 package com.coach.Coach.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
-import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -21,13 +19,12 @@ public class Player {
 
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "player_stadium",
-                joinColumns = @JoinColumn(name = "player_id"),
-                inverseJoinColumns = @JoinColumn(name = "stadium_id"))
+            joinColumns = @JoinColumn(name = "player_id"),
+            inverseJoinColumns = @JoinColumn(name = "stadium_id"))
     public Set<Stadium> stadiums;
 
     private String playerName;
     private int playerAge;
-
 
     public Long getId() {
         return playerId;
@@ -84,9 +81,11 @@ public class Player {
     public void setPlayerAge(int playerAge) {
         this.playerAge = playerAge;
     }
+
     public Set<Stadium> getStadiums() {
         return stadiums;
     }
+
     public void setStadiums(Set<Stadium> stadiums) {
         this.stadiums = stadiums;
     }
@@ -94,6 +93,4 @@ public class Player {
     public void addStadium(Stadium stadium) {
         this.stadiums.add(stadium);
     }
-
-
 }

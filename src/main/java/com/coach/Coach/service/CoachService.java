@@ -27,7 +27,6 @@ public class CoachService {
         this.clubRepository = clubRepository;
     }
 
-
     public List<Coach> getAllCoaches() {
         return coachRepository.findAll();
     }
@@ -86,5 +85,3 @@ public class CoachService {
         return false;
     }
 }
-
-

@@ -18,8 +18,6 @@ public class Stadium {
             joinColumns = @JoinColumn(name = "stadium_id"),
             inverseJoinColumns = @JoinColumn(name = "player_id"))
     private Set<Player> players;
-
-
     private String stadiumName;
     private int stadiumAge;
 

@@ -17,9 +17,7 @@ public class Club {
     private String name;
     private int age;
 
-    public Club() {
-
-    }
+    public Club() {}
 
     public Long getId() {
         return id;
@@ -44,6 +42,7 @@ public class Club {
     public void setAge(int age) {
         this.age = age;
     }
+
     public Coach getCoach() {
         return coach;
     }
@@ -51,6 +50,4 @@ public class Club {
     public void setCoach(Coach coach) {
         this.coach = coach;
     }
-
-
 }

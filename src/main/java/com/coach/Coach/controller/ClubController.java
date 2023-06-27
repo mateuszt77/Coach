@@ -37,11 +37,6 @@ public class ClubController {
         }
     }
 
-//    @GetMapping("/getClubsByName/{name}")
-//    public List<Club> FindAllClubsByName(@PathVariable String name) {
-//        return clubService.findAllClubsByName(name);
-//    }
-
     @DeleteMapping("/{clubId}")
     public ResponseEntity<Void> deleteClubById(@PathVariable Long clubId) {
         if (clubService.getClubById(clubId).isEmpty()) {
@@ -79,10 +74,5 @@ public class ClubController {
             return ResponseEntity.ok("Coach was set successfully");
         }
         return ResponseEntity.notFound().build();
-
     }
 }
-
-
-
-

@@ -64,16 +64,13 @@ public class CoachController {
             return ResponseEntity.notFound().build();
         }
     }
+
     @PatchMapping("/{coachId}/setPlayer/{playerId}")
     public ResponseEntity<String> setPlayersForCoach(@PathVariable Long coachId, @PathVariable Long playerId) {
         boolean coachIsSetForPlayer = coachService.setPlayersForCoach(coachId, playerId);
-        if(coachIsSetForPlayer) {
+        if (coachIsSetForPlayer) {
             return ResponseEntity.ok("Players set for Coach successfully");
         }
         return ResponseEntity.notFound().build();
     }
 }
-
-
-
-

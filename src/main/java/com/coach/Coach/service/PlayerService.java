@@ -1,6 +1,5 @@
 package com.coach.Coach.service;
 
-import com.coach.Coach.model.Coach;
 import com.coach.Coach.model.Player;
 import com.coach.Coach.model.Stadium;
 import com.coach.Coach.repository.CoachRepository;
@@ -70,5 +69,3 @@ public class PlayerService {
         return Optional.empty();
     }
 }
-
-
