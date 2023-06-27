@@ -20,7 +20,9 @@ public class Player {
     private Coach coach;
 
     @ManyToMany(cascade = CascadeType.MERGE)
-    @JoinTable(name = "player_stadium", joinColumns = @JoinColumn(name = "player_id"), inverseJoinColumns = @JoinColumn(name = "stadium_id"))
+    @JoinTable(name = "player_stadium",
+                joinColumns = @JoinColumn(name = "player_id"),
+                inverseJoinColumns = @JoinColumn(name = "stadium_id"))
     public Set<Stadium> stadiums;
 
     private String playerName;

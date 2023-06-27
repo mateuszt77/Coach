@@ -14,8 +14,9 @@ public class Stadium {
     private Long stadiumId;
     @ManyToMany(cascade = CascadeType.MERGE)
     @JsonIgnore
-    //@ManyToMany(mappedBy = "products")
-    @JoinTable(name = "player_stadium", joinColumns = @JoinColumn(name = "stadium_id"), inverseJoinColumns = @JoinColumn(name = "player_id"))
+    @JoinTable(name = "player_stadium",
+            joinColumns = @JoinColumn(name = "stadium_id"),
+            inverseJoinColumns = @JoinColumn(name = "player_id"))
     private Set<Player> players;
 
 
