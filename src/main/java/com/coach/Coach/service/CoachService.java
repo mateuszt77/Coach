@@ -45,6 +45,10 @@ public class CoachService {
                 club.setCoach(null);
                 clubRepository.save(club);
             }
+            for (Player player : coachToDelete.get().getPlayerList()) {
+                player.setCoach(null);
+                playerRepository.save(player);
+            }
             coachRepository.deleteById(coachId);
         }
     }

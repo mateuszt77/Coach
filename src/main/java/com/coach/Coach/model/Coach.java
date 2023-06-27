@@ -94,4 +94,5 @@ public class Coach {
     public void addPlayer(Player player) {
         this.playerList.add(player);
     }
+
 }

@@ -92,4 +92,6 @@ public class Player {
     public void addStadium(Stadium stadium) {
         this.stadiums.add(stadium);
     }
+
+
 }

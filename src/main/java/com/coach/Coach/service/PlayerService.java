@@ -33,10 +33,7 @@ public class PlayerService {
     public void deletePlayerById(Long playerId) {
         Optional<Player> playerToDelete = playerRepository.findById(playerId);
         if (playerToDelete.isPresent()) {
-//            for (Coach coach : playerToDelete.get().getCoaches()) {
-//                coach.setPlayer(null);
-//                coachRepository.save(coach);
-//            }
+
             playerRepository.deleteById(playerId);
         }
     }
