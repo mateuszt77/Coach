@@ -1,21 +1,25 @@
 package com.coach.Coach.service;
 
+
 import com.coach.Coach.model.Club;
 import com.coach.Coach.repository.ClubRepository;
-import jakarta.annotation.Resource;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.mockito.MockitoAnnotations;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.when;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.*;
 
 class ClubServiceTest {
 
-    @Resource
     @InjectMocks
     private ClubService clubService;
 
@@ -27,15 +31,36 @@ class ClubServiceTest {
         MockitoAnnotations.openMocks(this);
     }
     @Test
-    void getAllClubs() {
+    void getAllClubsReturnListOfClubsFromRepository() {
+        List<Club> clubList = new ArrayList<>();
+        clubList.add(new Club(1L, "Real", 123));
+        clubList.add(new Club(2L, "Inter", 111));
+        when(clubRepository.findAll()).thenReturn(clubList);
+
+        List<Club> realClubList = clubService.getAllClubs();
+        assertEquals(clubList, realClubList);
     }
 
     @Test
-    void getClubById() {
+    void getClubByIdShouldReturnClub() {
+        Club club = new Club();
+        Mockito.when(clubRepository.findById(Mockito.anyLong())).thenReturn(Optional.of(club));
+
+        Optional<Club> retrievedClub = clubService.getClubById(1L);
+
+        Assertions.assertTrue(retrievedClub.isPresent());
+        assertEquals(club, retrievedClub.get());
     }
 
     @Test
-    void deleteClubById() {
+    void deleteClubByIdShouldRemoveClub() {
+        Long clubId = 1L;
+        Club clubToDelete = new Club();
+        clubToDelete.setId(clubId);
+
+        doNothing().when(clubRepository).deleteById(clubId);
+        clubService.deleteClubById(clubId);
+        verify(clubRepository, times(1)).deleteById(clubId);
     }
 
     @Test
@@ -54,3 +79,4 @@ class ClubServiceTest {
     void setCoachForClub() {
     }
 }
+
