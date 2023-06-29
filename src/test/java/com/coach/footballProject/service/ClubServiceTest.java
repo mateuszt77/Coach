@@ -112,10 +112,5 @@ class ClubServiceTest {
         clubService.setCoachForClub(clubId, coachId);
 
         verify(clubRepository).save(club);
-
-//        Optional<Club> optionalClub = clubService.setCoachForClub(clubId, coachId);
-//
-//        Assertions.assertEquals(club, optionalClub.get());
-//        Assertions.assertEquals(coach, club.getCoach());
     }
 }
