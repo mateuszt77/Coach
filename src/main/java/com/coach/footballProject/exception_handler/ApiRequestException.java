@@ -1,4 +1,4 @@
-package com.coach.Coach.exception_handler;
+package com.coach.footballProject.exception_handler;
 
 public class ApiRequestException extends RuntimeException {
 

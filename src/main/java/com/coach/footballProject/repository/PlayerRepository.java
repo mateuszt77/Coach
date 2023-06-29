@@ -1,7 +1,7 @@
-package com.coach.Coach.repository;
+package com.coach.footballProject.repository;
 
 
-import com.coach.Coach.model.Player;
+import com.coach.footballProject.model.Player;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -1,4 +1,4 @@
-package com.coach.Coach;
+package com.coach.footballProject;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

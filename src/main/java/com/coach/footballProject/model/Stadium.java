@@ -1,4 +1,4 @@
-package com.coach.Coach.model;
+package com.coach.footballProject.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;

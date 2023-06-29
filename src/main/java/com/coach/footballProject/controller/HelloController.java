@@ -1,4 +1,4 @@
-package com.coach.Coach.controller;
+package com.coach.footballProject.controller;
 
 
 import org.springframework.web.bind.annotation.GetMapping;

@@ -1,7 +1,7 @@
-package com.coach.Coach.controller;
+package com.coach.footballProject.controller;
 
-import com.coach.Coach.model.Coach;
-import com.coach.Coach.service.CoachService;
+import com.coach.footballProject.model.Coach;
+import com.coach.footballProject.service.CoachService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

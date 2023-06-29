@@ -1,11 +1,9 @@
-package com.coach.Coach.repository;
+package com.coach.footballProject.repository;
 
 
-import com.coach.Coach.model.Coach;
+import com.coach.footballProject.model.Coach;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-
-import java.util.Optional;
 
 @Repository
 public interface CoachRepository extends JpaRepository<Coach, Long> {

@@ -1,9 +1,9 @@
-package com.coach.Coach.service;
+package com.coach.footballProject.service;
 
-import com.coach.Coach.model.Player;
-import com.coach.Coach.model.Stadium;
-import com.coach.Coach.repository.PlayerRepository;
-import com.coach.Coach.repository.StadiumRepository;
+import com.coach.footballProject.model.Player;
+import com.coach.footballProject.model.Stadium;
+import com.coach.footballProject.repository.PlayerRepository;
+import com.coach.footballProject.repository.StadiumRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
